@@ -12,23 +12,35 @@ fig_ghi_year(
   alpha = 0.5,
   labels = FALSE,
   subtitle = NULL,
-  legend.position = c(0.98, 0.98),
-  seasonal_mean = TRUE,
+  seasonal_mean = FALSE,
   clearsky = TRUE,
+  legend.position = c(0.98, 0.98),
   legend.justification = c("right", "top")
 )
 }
 \arguments{
 \item{model}{`solarModel` object}
 
-\item{subtitle}{}
+\item{nyear}{reference year to plot.}
+
+\item{size}{size of the lines that connect the GHI points.}
+
+\item{alpha}{tranparency for the GHI line and points.}
+
+\item{labels}{logical, when `TRUE` will be added labels on x and y axis.}
+
+\item{subtitle}{plot subtitle}
+
+\item{seasonal_mean}{logical, when `TRUE` the seasonal mean will be plotted.}
+
+\item{clearsky}{logical, when `TRUE` the seasonal clearsky will be plotted.}
+
+\item{legend.justification}{}
 }
 \description{
 Plot the time series of solar radiation with clear sky and seasonal radiation.
 }
 \examples{
-library(solarr)
-model <- Bologna
 fig_ghi_year(model, nyear = 2019)
 fig_ghi_year(model, nyear = 2019, seasonal_mean = FALSE)
 fig_ghi_year(model, nyear = 2019, seasonal_mean = FALSE, clearsky = FALSE)

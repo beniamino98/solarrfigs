@@ -3,15 +3,17 @@
 #' Plot the time series of solar radiation with clear sky and seasonal radiation.
 #'
 #' @param model `solarModel` object
-#' @param nyear
-#' @param size
-#' @param alpha
-#' @param labels
-#' @param subtitle
+#' @param nyear reference year to plot.
+#' @param size size of the lines that connect the GHI points.
+#' @param alpha tranparency for the GHI line and points.
+#' @param labels logical, when `TRUE` will be added labels on x and y axis.
+#' @param subtitle plot subtitle
+#' @param seasonal_mean logical, when `TRUE` the seasonal mean will be plotted.
+#' @param clearsky logical, when `TRUE` the seasonal clearsky will be plotted.
+#' @param legend.position
+#' @param legend.justification
 #'
 #' @examples
-#' library(solarr)
-#' model <- Bologna
 #' fig_ghi_year(model, nyear = 2019)
 #' fig_ghi_year(model, nyear = 2019, seasonal_mean = FALSE)
 #' fig_ghi_year(model, nyear = 2019, seasonal_mean = FALSE, clearsky = FALSE)
@@ -21,11 +23,11 @@
 #' @rdname fig_ghi_year
 #' @name fig_ghi_year
 #' @export
-fig_ghi_year <- function(model, nyear = 2022, interval = NA, size = 0.3, alpha = 0.5, labels = FALSE, subtitle = NULL,
-                         legend.position = c(.98, .98), seasonal_mean = TRUE, clearsky = TRUE,
-                         legend.justification = c("right", "top")){
 
-  data <- dplyr::left_join(model$data, model$seasonal_data, by = c("Month", "Day"))
+fig_ghi_year <- function(model, nyear = 2022, interval = NA, size = 0.3, alpha = 0.5, labels = FALSE, subtitle = NULL,
+                         seasonal_mean = FALSE, clearsky = TRUE, legend.position = c(.98, .98), legend.justification = c("right", "top")){
+
+  data <- model$data
   if (!is.na(interval[1])) {
     from_date <- as.Date(interval[1])
     to_date <- as.Date(interval[2])

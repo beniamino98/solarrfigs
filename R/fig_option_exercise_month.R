@@ -6,16 +6,16 @@
 #' fig_option_exercise_month(Bologna$model, type = "model")
 #' fig_option_exercise_month(Palermo$model)
 #' fig_option_exercise_month(Palermo$model, type = "model")
-fig_option_exercise_month <- function(model, type = "sim", limits = c(0.27, 0.58), subtitle = NULL){
-  
-  type <- match.arg(type, choices = c(simulation = "sim", model = "model"))
-  
-  model$payoffs[[type]]$structured$payoff_month %>%
+fig_option_exercise_month <- function(payoff, type = "sim", limits = c(0.27, 0.58), subtitle = NULL){
+
+  type <- match.arg(type, choices = c(simulation = "sim", model = "mod"))
+
+  payoff[[type]]$structured$payoff_month %>%
     ggplot()+
     geom_line(aes(Month, exercise), size = 1.2)+
     geom_line(aes(Month, exercise_P), color = "blue")+
     geom_line(aes(Month, exercise_Q), color = "orange")+
-    geom_line(aes(Month, exercise_Qr), color = "magenta")+
+    # geom_line(aes(Month, exercise_Qr), color = "magenta")+
     geom_line(aes(Month, exercise_Qdw), color = "red", linetype = "dashed")+
     geom_line(aes(Month, exercise_Qup), color = "green", linetype = "dashed")+
     theme_bw()+
