@@ -1,18 +1,19 @@
 #' Plot surface
 #'
-#' Plot a bi or tri dimensional grid where each square (or altitude) is filled
+#' Plot a bidimensional or tridimensional grid where each square (or altitude) is filled
 #' accordingly to the magnitude of a variable of interest.
 #'
 #' @param data dataset with variables `lat`, `lon` and the variable of interest specified in `target`.
-#' @param solarModels a list of `solarModel` objects.
 #' @param target character, column name of the target variable to plot.
-#' @rdname fig_surface
-#' @name fig_suface
+#' @param by spacing in degrees in the grid.
+#'
 #' @aliases fig_surface2D
 #' @aliases fig_surface3D
 #' @examples
 #' fig_surface2D(sample_data$lat_lon_GHI)
 #' fig_surface3D(sample_data$lat_lon_GHI)
+#' @rdname fig_surface
+#' @name fig_suface
 #' @export
 fig_surface2D <- function(data, target = "GHI", by = 0.1){
 
@@ -50,7 +51,6 @@ fig_surface3D <- function(data, target = "GHI"){
   # 3D Surface
   plotly::plot_ly(x=x_coord, y=y_coord, z=z_coord, type = "surface")
 }
-
 
 #' @rdname fig_surface
 #' @export

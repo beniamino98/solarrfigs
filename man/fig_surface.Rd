@@ -21,10 +21,10 @@ fig_surface3D_solarModels(solarModels, target = "GHI", nmonth = 1, date)
 
 \item{target}{character, column name of the target variable to plot.}
 
-\item{solarModels}{a list of `solarModel` objects.}
+\item{by}{spacing in degrees in the grid.}
 }
 \description{
-Plot a bi or tri dimensional grid where each square (or altitude) is filled
+Plot a bidimensional or tridimensional grid where each square (or altitude) is filled
 accordingly to the magnitude of a variable of interest.
 }
 \examples{

@@ -7,6 +7,7 @@
 fig_ghi_year(
   model,
   nyear = 2022,
+  line = TRUE,
   interval = NA,
   size = 0.3,
   alpha = 0.5,
@@ -23,9 +24,13 @@ fig_ghi_year(
 
 \item{nyear}{reference year to plot.}
 
-\item{size}{size of the lines that connect the GHI points.}
+\item{line}{logical, when TRUE the GHI points will be connected with a line.}
 
-\item{alpha}{tranparency for the GHI line and points.}
+\item{interval}{character vector, optional vector with start and end date for plotting.}
+
+\item{size}{size of the GHI points.}
+
+\item{alpha}{transparency for the GHI line and points.}
 
 \item{labels}{logical, when `TRUE` will be added labels on x and y axis.}
 
@@ -35,16 +40,20 @@ fig_ghi_year(
 
 \item{clearsky}{logical, when `TRUE` the seasonal clearsky will be plotted.}
 
-\item{legend.justification}{}
+\item{legend.position}{position of the legend}
+
+\item{legend.justification}{justification of the legend.}
 }
 \description{
 Plot the time series of solar radiation with clear sky and seasonal radiation.
 }
 \examples{
+model <- SampleData$model
 fig_ghi_year(model, nyear = 2019)
+fig_ghi_year(model, line=FALSE, legend.position="none")
 fig_ghi_year(model, nyear = 2019, seasonal_mean = FALSE)
 fig_ghi_year(model, nyear = 2019, seasonal_mean = FALSE, clearsky = FALSE)
 fig_ghi_year(model, interval = c("2020-04-01", "2020-09-22"))
 fig_ghi_year(model, interval = c("2020-04-01", "2020-09-22"),
-legend.position = "none", legend.justification = NULL)
+legend.position = "none", legend.justification = NULL, labels = TRUE)
 }

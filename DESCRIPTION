@@ -3,15 +3,15 @@ Type: Package
 Title: Solar Figures
 Version: 0.1.0
 Author: Beniamino Sartini
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-Depends: R (>= 3.5.0),
+Maintainer: Beniamino Sartini <beniamino.sartini2@unibo.it>
+Description: Generator function of figures related to solar radiation. 
+Depends: R (>= 4.4.0),
          tidyverse,
          backports,
          latex2exp,
          solarr
-License: What license is it under?
+License: GPL-3
+VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.1
+RoxygenNote: 7.3.2

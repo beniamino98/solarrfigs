@@ -1,17 +1,22 @@
-#' @rdname fig_option_premium_month
+#' Plot the option price for every month under different measures.
+#'
 #' @examples
-#' fig_option_premium_month(Bologna$model, type = "sim")
-#' fig_option_premium_month(Bologna$model, type = "model")
-#' fig_option_premium_month(Oslo$model, type = "sim")
-#' fig_option_premium_month(Oslo$model, type = "model")
-#' fig_option_premium_month(Palermo$model, type = "sim")
-#' fig_option_premium_month(Palermo$model, type = "model")
+#' payoffs <- SampleData$payoffs
+#' fig_option_premium_month(payoffs, type = "scenarios")
+#' fig_option_premium_month(payoffs, type = "model")
+#' fig_option_premium_month(payoffs, type = "scenarios", put = FALSE)
+#' fig_option_premium_month(payoffs, type = "model", put = FALSE)
+#' @rdname fig_option_premium_month
+#' @name fig_option_premium_month
+#' @export
+fig_option_premium_month <- function(payoffs, type = "scenarios", put = TRUE, tick = 1, subtitle = NULL){
 
-fig_option_premium_month <- function(model, type = "sim", tick = 1, subtitle = NULL){
-  
-  type <- match.arg(type, choices = c(simulation = "sim", model = "model"))
-  
-  model$payoffs[[type]]$structured$payoff_month %>%
+  type <- match.arg(type, choices = c(scenarios = "scenarios", model = "model"))
+  option_type = ifelse(put, "put", "call")
+
+  payoffs <- solarOption_structure(payoffs, type, put)
+
+  payoffs[[option_type]][[type]]$structured$payoff_month %>%
     ggplot()+
     geom_line(aes(Month, tick*premium), size = 1.2)+
     geom_line(aes(Month, tick*premium_Qdw), color = "red", linetype = "dashed")+
@@ -23,15 +28,5 @@ fig_option_premium_month <- function(model, type = "sim", tick = 1, subtitle = N
     scale_y_continuous(breaks = seq(5, 100, 5), labels = paste0(round(seq(5, 100, 5), 2), " €"))+
     scale_x_continuous(breaks = seq(2, 12, 2), labels = lubridate::month(seq(2, 12, 2), label = TRUE))+
     labs(x = "Month", y = "Option price", subtitle = subtitle)+
-    theme(legend.position = "none",
-          plot.subtitle = element_text(size = 24),
-          axis.title.x = element_text(size = 15),
-          axis.title.y = element_text(size = 15),
-          axis.text.x = element_text(size = 15),
-          axis.text.y = element_text(size = 15, angle = 0),
-          axis.ticks = element_line(linewidth = 0.4),
-          panel.grid.minor.x = element_blank(),
-          panel.grid.minor.y = element_blank(),
-          panel.grid.major.y = element_line(color = "black", linetype = "dashed", linewidth = 0.1),
-          panel.grid.major.x = element_blank())
+    theme(legend.position = "none")
 }

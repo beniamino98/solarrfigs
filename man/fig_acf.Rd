@@ -2,7 +2,7 @@
 % Please edit documentation in R/fig_acf.R
 \name{fig_acf}
 \alias{fig_acf}
-\title{Plot the autocorrelation function of the first 3 moments}
+\title{Plot the autocorrelation function}
 \usage{
 fig_acf(
   x,
@@ -10,16 +10,27 @@ fig_acf(
   label = "x",
   caption = NULL,
   ci = 0.05,
-  ci_color = "blue"
+  ci_color = "blue",
+  limits
 )
 }
 \arguments{
-\item{ci_color}{}
+\item{x}{time series on which it is computed the autocorrelation,}
+
+\item{lag_max}{numeric, maximum number for the autocorrelation function.}
+
+\item{label}{character, optional label for y-axis.}
+
+\item{caption}{character, optional caption.}
+
+\item{ci}{probability for confidence intervals.}
+
+\item{ci_color}{character, color of the confidences intervals.}
 }
 \description{
-Plot the autocorrelation function of the first 3 moments
+Plot the autocorrelation function
 }
 \examples{
-fig_acf(rnorm(5000), label = "\\\\tilde{Y}_t", ci_color = "black", lag_max = 100)
+fig_acf(rnorm(5000), label = "\\\\tilde{Y}_t", ci_color = "red", lag_max = 100, limits = c(-0.1, 0.1))
 
 }

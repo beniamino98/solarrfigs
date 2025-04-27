@@ -2,7 +2,6 @@
 % Please edit documentation in R/fig_mixture_pdf.R
 \name{fig_mixture_pdf}
 \alias{fig_mixture_pdf}
-\alias{fig_mixture_pdf_monthh}
 \alias{fig_mixture_pdf_month}
 \title{Plot the monthly Gaussian mixture density divided by its components}
 \usage{
@@ -19,12 +18,10 @@ fig_mixture_pdf_month(model, nmonth = 1, bins = 30)
 }
 \description{
 Plot the monthly Gaussian mixture density divided by its components
-
-Plot a monthly Gaussian mixture density divided by its components
 }
 \examples{
-fig_mixture_monthly_pdf(model)
-library(solarr)
-model <- Bologna
+model <- SampleData$model
+fig_mixture_pdf(model)
 fig_mixture_pdf_month(model)
+
 }

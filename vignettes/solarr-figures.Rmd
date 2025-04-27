@@ -1,0 +1,35 @@
+---
+title: "Figures"
+author: "Beniamino Sartini"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+library(solarrfigs)
+model <- Bologna$model
+```
+
+
+# fig_acf
+
+```{r}
+x <- rnorm(5000)
+fig_acf(x, label = "\\tilde{Y}_t", ci_color = "black", lag_max = 100)
+```
+
+# fig_ghi_year
+
+```{r}
+fig_ghi_year(model, nyear = 2019)
+fig_ghi_year(model, nyear = 2019, seasonal_mean = FALSE)
+fig_ghi_year(model, nyear = 2019, seasonal_mean = FALSE, clearsky = FALSE)
+fig_ghi_year(model, interval = c("2020-04-01", "2020-09-22"))
+fig_ghi_year(model, interval = c("2020-04-01", "2020-09-22"), legend.position = "none", legend.justification = NULL, labels = TRUE)
+```
+
+

@@ -2,12 +2,16 @@
 #' @param model solarModel
 #' @param nmonth number of month
 #' @param bins number of bins
+#'
 #' @examples
-#' fig_mixture_monthly_pdf(model)
+#' model <- SampleData$model
+#' fig_mixture_pdf(model)
+#' fig_mixture_pdf_month(model)
+#'
+#' @aliases  fig_mixture_pdf
+#' @aliases  fig_mixture_pdf_month
 #' @rdname fig_mixture_pdf
 #' @name fig_mixture_pdf
-#' @aliases  fig_mixture_pdf
-#' @aliases  fig_mixture_pdf_monthh
 #' @export
 fig_mixture_pdf <- function(model, bins = 30){
   # Plot for each month
@@ -27,18 +31,12 @@ fig_mixture_pdf <- function(model, bins = 30){
   yleft <- gridtext::richtext_grob("Density", rot = 90, vjust = 1, gp = grid::gpar(fontsize = 20))
   # x-label
   xbottom <- gridtext::richtext_grob(text = 'Residuals', vjust = 0.25, gp = grid::gpar(fontsize = 20))
+
   gridExtra::grid.arrange(plot_1, plot_2, plot_3, plot_4, plot_5, plot_6,
                           plot_7, plot_8, plot_9, plot_10, plot_11, plot_12,
                           ncol = 4, nrow = 3, left = yleft, bottom = xbottom)
 }
 
-
-#' Plot a monthly Gaussian mixture density divided by its components
-#'
-#' @examples
-#' library(solarr)
-#' model <- Bologna
-#' fig_mixture_pdf_month(model)
 #' @rdname fig_mixture_pdf
 #' @name fig_mixture_pdf
 #' @export
@@ -49,9 +47,9 @@ fig_mixture_pdf_month <- function(model, nmonth = 1, bins = 30){
   # Empiric density
   pdf_emp <- density(ut)
   # Normal mixture parameters
-  params <- unlist(model$NM_model[nmonth,-1])
+  params <- unlist(model$NM_model$coefficients[nmonth,-1])
   # Normal mixture probabilities
-  p <- solarr::dmixnorm(pdf_emp$x, means = params[1:2], sd = params[3:4], p = c(params[5], 1-params[5]))
+  p <- solarr::dmixnorm(pdf_emp$x, params[1:2], params[3:4], c(params[5], 1-params[5]))
   # Normal mixture component 1
   pdf_1 <- dnorm(pdf_emp$x, mean = params[1], sd = params[3])*params[5]
   # Normal mixture component 2
@@ -80,16 +78,6 @@ fig_mixture_pdf_month <- function(model, nmonth = 1, bins = 30){
     scale_y_continuous(breaks = round(seq.default(min(p), max(p), length.out = 4), 3))+
     labs(color = NULL, x = NULL, y = NULL, subtitle = lubridate::month(nmonth, label = T, abbr = F))+
     theme_bw()+
-    theme(legend.position = "none",
-          plot.subtitle = element_text(size = 20),
-          axis.text.y = element_text(size = 10),
-          axis.text.x = element_text(size = 10),
-          axis.title.x = element_text(size = 10),
-          axis.title.y = element_text(size = 10),
-          panel.grid.minor.x = element_blank(),
-          panel.grid.minor.y = element_blank(),
-          panel.grid.major.y = element_line(color = "black", linetype = "dashed", linewidth = 0.1),
-          panel.grid.major.x = element_blank()
-    )
+    theme(legend.position = "none")
 }
 
